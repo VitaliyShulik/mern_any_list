@@ -28,7 +28,8 @@ class ShoppingList extends Component {
                     <TransitionGroup className="shopping-list">
                         {items.map(({ _id, name }) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
+                                <ListGroupItem className="list-item">
+                                    {name}
                                     { this.props.isAuthenticated ? 
                                         <Button
                                             className="remove-btn"
@@ -38,7 +39,6 @@ class ShoppingList extends Component {
                                         >
                                             &times;
                                         </Button> : null }
-                                    {name}
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}

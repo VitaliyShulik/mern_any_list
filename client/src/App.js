@@ -10,7 +10,6 @@ import { loadUser } from './actions/authActions';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { config } from 'react-transition-group';
 
 class App extends Component {
   componentDidMount() {
