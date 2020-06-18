@@ -1,6 +1,18 @@
+.shopping-list {
+    border-radius: 0.3rem;
+}
+.item {
+    padding-top: 0.3rem;
+}
+
+.item-checkbox { 
+    margin-right: 0.5rem;
+}
+
 .list-item {
     display: flex;
     justify-content: space-between;
+    border-radius: 0.3rem;
 }
 
 .remove-btn {

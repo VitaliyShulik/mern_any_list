@@ -29,7 +29,10 @@ class ShoppingList extends Component {
                         {items.map(({ _id, name }) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem className="list-item">
-                                    {name}
+                                    <div className="item">
+                                        <input type="checkbox" className="item-checkbox" checked></input>
+                                        <span>{name}</span>
+                                    </div>
                                     { this.props.isAuthenticated ? 
                                         <Button
                                             className="remove-btn"

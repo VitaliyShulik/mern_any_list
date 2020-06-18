@@ -7,6 +7,10 @@ const ItemSchema = new Schema({
         type: String,
         require: true
     },
+    isCompleted: {
+        type: Boolean,
+        default: false
+    },
     date: {
         type: Date,
         default: Date.now

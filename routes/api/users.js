@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const validateEmail = require('../../middleware/emailValidator')
 
 // User Model
 const User = require('../../models/User');
@@ -63,10 +64,5 @@ router.post('/', (req, res) => {
            });
         });
 });
-
-function validateEmail(email) {
-    const regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regExp.test(String(email).toLowerCase());
-}
 
 module.exports = router;
