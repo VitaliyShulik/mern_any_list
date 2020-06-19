@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../actions/itemActions';
+import { getItems, toggleCompleted, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 class ShoppingList extends Component {
     static propTypes = {
         getItems: PropTypes.func.isRequired,
         item: PropTypes.object.isRequired,
-        isAuthenticated: PropTypes.bool
+        isAuthenticated: PropTypes.bool,
     }
 
     componentDidMount() {
@@ -20,18 +20,31 @@ class ShoppingList extends Component {
         this.props.deleteItem(id);
     };
 
+    onToggleCompletedClick = (id, name, isCompleted) => {
+        this.props.toggleCompleted(id, name, isCompleted);
+    }
+
     render() {
         const { items } = this.props.item;
+       
         return(
             <Container>
                 <ListGroup> 
                     <TransitionGroup className="shopping-list">
-                        {items.map(({ _id, name }) => (
+                        {items.map(({ _id, name, isCompleted }) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem className="list-item">
                                     <div className="item">
-                                        <input type="checkbox" className="item-checkbox" checked></input>
-                                        <span>{name}</span>
+                                        { this.props.isAuthenticated ? 
+                                            <input 
+                                                type="checkbox" 
+                                                className="item-checkbox" 
+                                                checked={isCompleted}
+                                                onChange={this.onToggleCompletedClick.bind(this, _id, name, isCompleted)}
+                                            /> : null}
+                                        <span 
+                                        style={isCompleted ? { textDecoration: 'line-through black' } : null}
+                                        >{name}</span>
                                     </div>
                                     { this.props.isAuthenticated ? 
                                         <Button
@@ -59,5 +72,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps, 
-    { getItems, deleteItem }
+    { getItems, toggleCompleted, deleteItem }
 )(ShoppingList);

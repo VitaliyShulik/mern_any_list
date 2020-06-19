@@ -29,7 +29,7 @@ router
     });
 
 // @route PUT api/items/:id
-// @desc Create A Item
+// @desc Update A Item
 // @access Private
 router
     .put('/:id', auth, (req, res) => {
@@ -42,15 +42,12 @@ router
             .then((oldResult) => {
                 Item.findOne({ _id: req.params.id })
                     .then((newResult) => {
-                        res.json({ 
-                            success: true, 
-                            msg: 'Successfully updated!', 
-                            result:{
-                                _id: newResult._id,
-                                name: newResult.name,
-                                isCompleted: newResult.isCompleted
-                            }
-                        });
+                        const item = { 
+                            _id: newResult._id,
+                            name: newResult.name,
+                            isCompleted: newResult.isCompleted
+                        }
+                        res.json(item);
                     })
                     .catch(err => res.status(500).json({ success: false, msg: `Something went wrong. ${err}` })); 
             })

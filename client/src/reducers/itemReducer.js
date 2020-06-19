@@ -1,8 +1,9 @@
 import { 
     GET_ITEMS, 
-    ADD_ITEM, 
+    ADD_ITEM,
+    TOGGLE_COMPLETED_ITEM, 
     DELETE_ITEM, 
-    ITEMS_LOADING 
+    ITEMS_LOADING,
 } from '../actions/types';
 
 
@@ -13,11 +14,21 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case GET_ITEMS:
+        case GET_ITEMS:        
             return {
                 ...state,
                 items: action.payload,
                 loading: false
+            };
+        case TOGGLE_COMPLETED_ITEM:
+            state.items.forEach(item => {
+                if (item._id === action.payload._id) {
+                    item.isCompleted = !item.isCompleted;
+                };
+            });
+            return {
+                ...state,
+                items: [...state.items],
             };
         case DELETE_ITEM:
             return {
