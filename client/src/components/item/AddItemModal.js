@@ -11,9 +11,9 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addItem } from '../actions/itemActions';
+import { addItem } from '../../actions/itemActions';
 
-class ItemModal extends Component{
+class AddItemModal extends Component{
     state = {
         modal: false,
         name: ''
@@ -72,7 +72,7 @@ class ItemModal extends Component{
                                 <Input
                                     type="text"
                                     name="name"
-                                    it="item"
+                                    id="item"
                                     placeholder="Add shopping item"
                                     onChange={this.onChange}
                                 ></Input>
@@ -95,4 +95,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { addItem })(ItemModal);
+export default connect(mapStateToProps, { addItem })(AddItemModal);

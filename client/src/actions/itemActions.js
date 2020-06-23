@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING, TOGGLE_COMPLETED_ITEM } from './types';
+import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING, TOGGLE_IS_COMPLETED_ITEM } from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
@@ -30,13 +30,13 @@ export const addItem = item => (dispatch, getState) => {
             );
 };
 
-export const toggleCompleted = (id,  name, isCompleted) => (dispatch, getState) => {
+export const toggleIsCompleted = (id,  name, isCompleted) => (dispatch, getState) => {
     isCompleted = !isCompleted;
     axios
         .put(`/api/items/${id}`, { name, isCompleted }, tokenConfig(getState))
         .then(res => 
             dispatch({
-                type: TOGGLE_COMPLETED_ITEM,
+                type: TOGGLE_IS_COMPLETED_ITEM,
                 payload: res.data
             }))
             .catch(err => 

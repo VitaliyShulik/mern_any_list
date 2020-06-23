@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getItems, toggleCompleted, deleteItem } from '../actions/itemActions';
+import { getItems, toggleIsCompleted, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
+import UpdateItemModal from './item/UpdateItemModal';
 
 class ShoppingList extends Component {
     static propTypes = {
@@ -20,8 +21,8 @@ class ShoppingList extends Component {
         this.props.deleteItem(id);
     };
 
-    onToggleCompletedClick = (id, name, isCompleted) => {
-        this.props.toggleCompleted(id, name, isCompleted);
+    onToggleIsCompletedClick = (id, name, isCompleted) => {
+        this.props.toggleIsCompleted(id, name, isCompleted);
     }
 
     render() {
@@ -38,13 +39,18 @@ class ShoppingList extends Component {
                                         { this.props.isAuthenticated ? 
                                             <input 
                                                 type="checkbox" 
-                                                className="item-checkbox" 
+                                                className="item-checkbox"
                                                 checked={isCompleted}
-                                                onChange={this.onToggleCompletedClick.bind(this, _id, name, isCompleted)}
+                                                onChange={this.onToggleIsCompletedClick.bind(this, _id, name, isCompleted)}
                                             /> : null}
-                                        <span 
-                                        style={isCompleted ? { textDecoration: 'line-through black' } : null}
-                                        >{name}</span>
+                                            <span 
+                                                style={
+                                                    isCompleted ? 
+                                                    { textDecoration: 'line-through black' } : 
+                                                    { textDecoration: 'none' }
+                                                    }
+                                            >{name}</span>
+                                        { this.props.isAuthenticated ? <UpdateItemModal id={_id} name={name} isCompleted={isCompleted} /> : null }
                                     </div>
                                     { this.props.isAuthenticated ? 
                                         <Button
@@ -72,5 +78,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps, 
-    { getItems, toggleCompleted, deleteItem }
+    { getItems, toggleIsCompleted, deleteItem }
 )(ShoppingList);

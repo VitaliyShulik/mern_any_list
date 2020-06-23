@@ -1,7 +1,7 @@
 import { 
     GET_ITEMS, 
     ADD_ITEM,
-    TOGGLE_COMPLETED_ITEM, 
+    TOGGLE_IS_COMPLETED_ITEM, 
     DELETE_ITEM, 
     ITEMS_LOADING,
 } from '../actions/types';
@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
                 items: action.payload,
                 loading: false
             };
-        case TOGGLE_COMPLETED_ITEM:
+        case TOGGLE_IS_COMPLETED_ITEM:
             state.items.forEach(item => {
                 if (item._id === action.payload._id) {
                     item.isCompleted = !item.isCompleted;
