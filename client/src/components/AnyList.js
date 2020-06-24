@@ -6,7 +6,7 @@ import { getItems, toggleIsCompleted, deleteItem } from '../actions/itemActions'
 import PropTypes from 'prop-types';
 import UpdateItemModal from './item/UpdateItemModal';
 
-class ShoppingList extends Component {
+class AnyList extends Component {
     static propTypes = {
         getItems: PropTypes.func.isRequired,
         item: PropTypes.object.isRequired,
@@ -31,7 +31,7 @@ class ShoppingList extends Component {
         return(
             <Container>
                 <ListGroup> 
-                    <TransitionGroup className="shopping-list">
+                    <TransitionGroup className="any-list">
                         {items.map(({ _id, name, isCompleted }) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem className="list-item">
@@ -79,4 +79,4 @@ const mapStateToProps = (state) => ({
 export default connect(
     mapStateToProps, 
     { getItems, toggleIsCompleted, deleteItem }
-)(ShoppingList);
+)(AnyList);

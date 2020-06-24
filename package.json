@@ -1,7 +1,7 @@
 {
   "name": "learn_mern_stack",
   "version": "1.0.0",
-  "description": "Shopping list built with the mern stack",
+  "description": "Any list built with the mern stack",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
