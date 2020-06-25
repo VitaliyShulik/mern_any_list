@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { updateItem } from '../../actions/itemActions';
+import { updateItem } from '../../actions/itemActions';
 import PencilAltIcon from '../heroicons/PencilAlt.jsx';
 
 class UpdateItemModal extends Component{
@@ -46,14 +46,14 @@ class UpdateItemModal extends Component{
     onSubmit = e => {
         e.preventDefault();
 
-        // const updatedItem = {
-        //     id: this.state.id,
-        //     name: this.state.name,
-        //     isCompleted: this.state.isCompleted
-        // }
+        const updatedItem = {
+            id: this.state.id,
+            name: this.state.name,
+            isCompleted: this.state.isCompleted
+        }
 
-        // Add item via addItem action
-        // this.props.updateItem(updatedItem);
+        // Edit item via updateItem action
+        this.props.updateItem(updatedItem);
 
         // Close modal
         this.toggle();
@@ -108,4 +108,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, {  })(UpdateItemModal);
+export default connect(mapStateToProps, { updateItem })(UpdateItemModal);

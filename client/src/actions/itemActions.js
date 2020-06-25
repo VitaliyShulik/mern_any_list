@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING, TOGGLE_IS_COMPLETED_ITEM } from './types';
+import { 
+    GET_ITEMS, 
+    ADD_ITEM,
+    UPDATE_ITEM, 
+    DELETE_ITEM, 
+    ITEMS_LOADING, 
+    TOGGLE_IS_COMPLETED_ITEM 
+} from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
@@ -23,6 +30,23 @@ export const addItem = item => (dispatch, getState) => {
         .then(res => 
             dispatch({
                 type: ADD_ITEM,
+                payload: res.data
+            }))
+            .catch(err => 
+                dispatch(returnErrors(err.response.data, err.response.status))
+            );
+};
+
+export const updateItem = item => (dispatch, getState) => {
+    const id = item.id;
+    const name = item.name;
+    const isCompleted = item.isCompleted;
+
+    axios
+        .put(`/api/items/${id}`, { name, isCompleted }, tokenConfig(getState))
+        .then(res => 
+            dispatch({
+                type: UPDATE_ITEM,
                 payload: res.data
             }))
             .catch(err => 

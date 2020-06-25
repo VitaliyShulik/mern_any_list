@@ -1,6 +1,7 @@
 import { 
     GET_ITEMS, 
     ADD_ITEM,
+    UPDATE_ITEM,
     TOGGLE_IS_COMPLETED_ITEM, 
     DELETE_ITEM, 
     ITEMS_LOADING,
@@ -20,12 +21,24 @@ export default function(state = initialState, action) {
                 items: action.payload,
                 loading: false
             };
+        case UPDATE_ITEM:
+            state.items.forEach(item => {
+                if (item._id === action.payload._id) {
+                    item.name = action.payload.name;
+                    item.isCompleted = action.payload.isCompleted;
+                };
+            });
+            return {
+                ...state,
+                items: [...state.items],
+            };
         case TOGGLE_IS_COMPLETED_ITEM:
             state.items.forEach(item => {
                 if (item._id === action.payload._id) {
                     item.isCompleted = !item.isCompleted;
                 };
             });
+            
             return {
                 ...state,
                 items: [...state.items],
