@@ -2,6 +2,8 @@
 
 > Any list app built with the MERN stack along with Redux for state management, Reactstrap and react-transition-group.
 
+[Demo](https://mines.vitaliyshulik.tk/)
+
 ## Quick Start
 
 ```bash
