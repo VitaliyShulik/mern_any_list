@@ -9,6 +9,13 @@
     margin-right: 0.5rem;
 }
 
+.completed-item-text {
+    text-decoration-line: line-through;
+    -webkit-text-decoration-line: line-through;
+    text-decoration-color: #bb2124;
+    -webkit-text-decoration-color: #bb2124;
+}
+
 .list-item {
     display: flex;
     justify-content: space-between;

@@ -69,7 +69,7 @@ class AnyList extends Component {
                                     onChange={this.onToggleIsCompletedClick.bind(this, _id, name, isCompleted)}
                                 /> : null}
                                 <span 
-                                    style={{ textDecoration: 'line-through black' }}
+                                    className="completed-item-text"
                                 >{name}</span>
                             { this.props.isAuthenticated ? <UpdateItemModal id={_id} name={name} isCompleted={isCompleted} /> : null }
                         </div>
